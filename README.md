@@ -1,4 +1,4 @@
-# SagaPay: Digital Banking System
+# Banking Backend Core
 
 > A production-style, event-driven digital banking platform built with Java, Spring Boot microservices, Apache Kafka and Redis. It features real-time fraud detection, OTP verification, and the **Saga Pattern** so that no transfer is ever left stuck halfway.
 
@@ -36,7 +36,7 @@
 Tapping "pay" and seeing money move in under two seconds hides two hard problems:
 
 1. **Real-time fraud detection.** Fraudsters run scripts that fire dozens of transactions in seconds. Suspicious activity has to be caught in milliseconds, before the account is drained.
-2. **Consistency across services.** In a monolith, `BEGIN / COMMIT / ROLLBACK` protects you. In microservices, every service owns its own database, so a failure midway cannot trigger a native rollback. SagaPay solves this with **explicit compensating transactions** (the Saga pattern).
+2. **Consistency across services.** In a monolith, `BEGIN / COMMIT / ROLLBACK` protects you. In microservices, every service owns its own database, so a failure midway cannot trigger a native rollback. This project solves this with **explicit compensating transactions** (the Saga pattern).
 
 ## Key features
 
@@ -129,7 +129,7 @@ Event handlers are **idempotent**. For example, `verification.required` is only 
 
 ## Saga pattern
 
-SagaPay uses **orchestration**: the Transaction Service is the decider and drives every step. Each step that changes state has a defined compensating action.
+This project uses **orchestration**: the Transaction Service is the decider and drives every step. Each step that changes state has a defined compensating action.
 
 | Step | Action | Compensation |
 | :--- | :--- | :--- |
@@ -199,8 +199,8 @@ If any rule trips, the transfer moves to OTP verification instead of completing.
 ### 1. Clone
 
 ```bash
-git clone https://github.com/<your-username>/sagapay-digital-banking.git
-cd sagapay-digital-banking
+git clone https://github.com/<your-username>/banking-backend-core.git
+cd banking-backend-core
 ```
 
 ### 2. Start infrastructure
@@ -249,7 +249,7 @@ curl -X POST http://localhost:8080/api/transactions \
 ## Project structure
 
 ```
-sagapay-digital-banking/
+banking-backend-core/
 ├── api-gateway/
 ├── account-service/
 ├── transaction-service/
